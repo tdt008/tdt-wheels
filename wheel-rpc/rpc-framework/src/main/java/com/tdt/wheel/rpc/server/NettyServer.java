@@ -11,6 +11,10 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author qrc
  * @description NettyServer
@@ -22,8 +26,8 @@ public class NettyServer {
      */
     private RpcInvokeHandler rpcInvokeHandler;
 
-    public NettyServer() {
-
+    public NettyServer(List<ServiceConfig> serviceConfigs, Map<String, Method> interfaceMethods) {
+        this.rpcInvokeHandler = new RpcInvokeHandler(serviceConfigs, interfaceMethods);
     }
 
     public int init(int port) throws Exception {

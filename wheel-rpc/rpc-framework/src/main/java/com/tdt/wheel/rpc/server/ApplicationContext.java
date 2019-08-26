@@ -22,9 +22,11 @@ public class ApplicationContext {
     
     List<ServiceConfig> serviceConfigs;
 
-    private Map<String, Object> interfaceMethods = new ConcurrentHashMap<>();
+    private Integer port;
 
-    public ApplicationContext(String registryUrl, List<ServiceConfig> serviceConfigs) {
+    private Map<String, Method> interfaceMethods = new ConcurrentHashMap<>();
+
+    public ApplicationContext(String registryUrl, List<ServiceConfig> serviceConfigs, Integer port) throws Exception {
         // 1. 保存需要暴露的接口配置
         this.serviceConfigs = serviceConfigs;
 
@@ -37,6 +39,7 @@ public class ApplicationContext {
             InetAddress addr = InetAddress.getLocalHost();
             String hostName = addr.getHostName();
             String hostAddress = addr.getHostAddress();
+
             registryInfo = new RegistryInfo(hostName, hostAddress, port);
             doRegistry(registryInfo);
         } catch (Exception e) {
@@ -46,7 +49,7 @@ public class ApplicationContext {
         // 4：初始化Netty服务器，接受到请求，直接打到服务提供者的service方法中
         if (!this.serviceConfigs.isEmpty()) {
             // 需要暴露接口才暴露
-            nettyServer = new NettyServer(this.serviceConfigs, interfaceMethods);
+            NettyServer nettyServer = new NettyServer(this.serviceConfigs, interfaceMethods);
             nettyServer.init(port);
         }
     }
