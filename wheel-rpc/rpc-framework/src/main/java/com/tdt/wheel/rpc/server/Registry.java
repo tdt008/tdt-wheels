@@ -3,6 +3,9 @@ package com.tdt.wheel.rpc.server;/**
  */
 
 
+import com.tdt.wheel.rpc.consumer.ReferenceConfig;
+
+import java.util.List;
 
 /**
  * @author qrc
@@ -17,4 +20,13 @@ public interface Registry {
      * @param registryInfo 本机的注册信息
      */
     void register(Class clazz, RegistryInfo registryInfo) throws Exception;
+    
+    /**
+     * @description 为服务提供者抓取注册表
+     * @param clazz
+     * @return java.util.List
+     * @author qrc
+     * @date 2019/8/26
+     */
+    List<RegistryInfo> fetchRegistry(Class clazz) throws Exception;
 }

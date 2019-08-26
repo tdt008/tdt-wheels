@@ -21,6 +21,7 @@ public class TestProducer {
         ApplicationContext ctx = new ApplicationContext(
                 connectionString,
                 serviceConfigList,
+                null,
                 50071);
     }
 }
