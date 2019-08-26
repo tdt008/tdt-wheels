@@ -45,4 +45,14 @@ public class RegistryInfo {
         this.port = port;
         return this;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("RegistryInfo{");
+        sb.append("hostname='").append(hostname).append('\'');
+        sb.append(", ip='").append(ip).append('\'');
+        sb.append(", port=").append(port);
+        sb.append('}');
+        return sb.toString();
+    }
 }
