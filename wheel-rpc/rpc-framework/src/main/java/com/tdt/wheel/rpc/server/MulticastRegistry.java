@@ -1,5 +1,7 @@
 package com.tdt.wheel.rpc.server;
 
+import java.util.List;
+
 /**
  * @author qrc
  * @description
@@ -13,5 +15,10 @@ public class MulticastRegistry implements Registry {
     @Override
     public void register(Class clazz, RegistryInfo registryInfo) throws Exception {
 
+    }
+
+    @Override
+    public List<RegistryInfo> fetchRegistry(Class clazz) throws Exception {
+        return null;
     }
 }

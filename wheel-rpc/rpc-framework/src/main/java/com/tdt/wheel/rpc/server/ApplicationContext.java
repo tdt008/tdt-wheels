@@ -18,6 +18,7 @@ import java.net.InetAddress;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.LongAdder;
 
 /**
@@ -54,6 +55,11 @@ public class ApplicationContext<T> {
 
     private Map<String, Invoker> inProgressInvoker = new ConcurrentHashMap<>();
 
+    private LinkedBlockingQueue<RpcResponse> responses = new LinkedBlockingQueue<>();
+
+    private ResponseProcessor[] procesors;
+
+
     public ApplicationContext(String registryUrl, List<ServiceConfig> serviceConfigs,
                               List<ReferenceConfig> referenceConfigs, Integer port) throws Exception {
         // 1. 保存需要暴露的接口配置
@@ -82,6 +88,9 @@ public class ApplicationContext<T> {
             NettyServer nettyServer = new NettyServer(this.serviceConfigs, interfaceMethods);
             nettyServer.init(port);
         }
+
+        // 5：启动处理响应的processor
+        initProcessor();
     }
 
     private void initRegistry(String registryUrl) {
@@ -123,7 +132,7 @@ public class ApplicationContext<T> {
                     public void onMessage(String message) {
                         // 这里收单服务端返回的信息，先压入队列
                         RpcResponse response = JSONObject.parseObject(message, RpcResponse.class);
-                        response.offer(response);
+                        responses.offer(response);
                         synchronized (ApplicationContext.this) {
                             ApplicationContext.this.notifyAll();
                         }
@@ -133,6 +142,61 @@ public class ApplicationContext<T> {
                 // 等待连接建立
                 ChannelHandlerContext ctx = client.getCtx();
                 channels.put(info, ctx);
+            }
+        }
+    }
+
+    private void initProcessor() {
+        // 事实上，这里可以通过配置文件读取，启动多少个processor
+        int num = 3;
+        procesors = new ResponseProcessor[num];
+        for (int i = 0; i < num; i++) {
+            procesors[i] = createProcessor(i);
+        }
+    }
+
+    private ResponseProcessor createProcessor(int i) {
+        ResponseProcessor responseProcessor = new ResponseProcessor(responses, inProgressInvoker, this);
+        return responseProcessor;
+    }
+
+    public static class ResponseProcessor extends Thread {
+
+        LinkedBlockingQueue<RpcResponse> responses;
+
+        Map<String, Invoker> inProgressInvoker;
+
+        ApplicationContext currApplicationContext;
+
+        public ResponseProcessor(LinkedBlockingQueue<RpcResponse> responses, Map<String, Invoker> inProgressInvoker, ApplicationContext currApplicationContext) {
+            this.responses = responses;
+            this.inProgressInvoker = inProgressInvoker;
+            this.currApplicationContext = currApplicationContext;
+        }
+
+        @Override
+        public void run() {
+            System.out.println("启动响应处理线程：" + getName());
+            while (true) {
+                // 多个线程在这里获取响应，只有一个成功
+                RpcResponse response = responses.poll();
+                if (response == null) {
+                    try {
+                        synchronized (currApplicationContext) {
+                            // 如果没有响应，先休眠
+                            currApplicationContext.wait();
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("收到一个响应：" + response);
+                    String interfaceMethodIdentify = response.getInterfaceMethodIdentify();
+                    String requestId = response.getRequestId();
+                    String key = interfaceMethodIdentify + "#" + requestId;
+                    Invoker invoker = inProgressInvoker.remove(key);
+                    invoker.setResult(response.getResult());
+                }
             }
         }
     }
