@@ -18,6 +18,9 @@
 *.zip
 *.tar.gz
 *.rar
+.mvnw
+mvnw.cmd
+.mvn/
 
 *.idea
 *.iml
