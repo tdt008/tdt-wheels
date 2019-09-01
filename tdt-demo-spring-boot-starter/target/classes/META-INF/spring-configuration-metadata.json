@@ -1,0 +1,27 @@
+{
+  "groups": [
+    {
+      "name": "tdt-config",
+      "type": "com.tdt.wheel.starter.config.TdtDemoConfig",
+      "sourceType": "com.tdt.wheel.starter.config.TdtDemoConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "tdt-config.account-sid",
+      "type": "java.lang.String",
+      "sourceType": "com.tdt.wheel.starter.config.TdtDemoConfig"
+    },
+    {
+      "name": "tdt-config.appid",
+      "type": "java.lang.String",
+      "sourceType": "com.tdt.wheel.starter.config.TdtDemoConfig"
+    },
+    {
+      "name": "tdt-config.auth-token",
+      "type": "java.lang.String",
+      "sourceType": "com.tdt.wheel.starter.config.TdtDemoConfig"
+    }
+  ],
+  "hints": []
+}
