@@ -6,13 +6,13 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.3.0.RELEASE</version>
+    <version>2.1.7.RELEASE</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>com.tdt.wheel.redis</groupId>
-  <artifactId>demo</artifactId>
+  <artifactId>wheel-redis</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>demo</name>
+  <name>wheel-redis</name>
   <description>Demo project for Spring Boot</description>
 
   <properties>
@@ -24,10 +24,25 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-redis</artifactId>
     </dependency>
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.10</version>
+      <scope>provided</scope>
+    </dependency>
+
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
