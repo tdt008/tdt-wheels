@@ -1,0 +1,41 @@
+# 配置端口
+server:
+  port: 8764
+
+spring:
+  application:
+    name: data-refill-center-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/wheel-jwt?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driverClassName: com.mysql.jdbc.Driver
+    initialSize: 50
+    minIdle: 50
+    maxActive: 500
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,log4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+
+# JWT配置
+jwt:
+  # 密匙KEY
+  secret: JWTSecret
+  # HeaderKEY
+  tokenHeader: Authorization
+  # Token前缀字符
+  tokenPrefix: Tdt-
+  # 过期时间 单位秒 1天后过期=86400 7天后过期=604800
+  expiration: 86400
+  # 配置不需要认证的接口
+  antMatchers: /index,/login/**,/favicon.ico
