@@ -1,8 +1,10 @@
 package com.tdt.wheel.spring.extension.controller;
 
 import com.tdt.wheel.spring.extension.bean.MyExtensionAbBeanDefinitionRegistryPostProcessor;
+import com.tdt.wheel.spring.extension.bean.MyExtensionAiPostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
