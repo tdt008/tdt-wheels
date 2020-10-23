@@ -17,6 +17,9 @@ public class TestController {
     @Value("${spring.application.name}")
     private String appName;
 
+    @Autowired
+    private MyExtensionAiPostConstruct myExtensionAiPostConstruct;
+
     @GetMapping("/hello")
     public String hello() {
         return appName + "[" + System.currentTimeMillis() + "]";
@@ -27,6 +30,12 @@ public class TestController {
 
     @GetMapping("/hello2")
     public String hello2() {
+        return myExtensionAba.hello();
+    }
+
+    @GetMapping("/hello3")
+    public String hello3() {
+        myExtensionAiPostConstruct.hello();
         return myExtensionAba.hello();
     }
 
