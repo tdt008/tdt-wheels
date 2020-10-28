@@ -1,6 +1,6 @@
-package com.tdt.springboot.service.impl;
+package com.tdt.springboot.service.autowired.impl;
 
-import com.tdt.springboot.service.PersonService;
+import com.tdt.springboot.service.autowired.PersonService;
 import org.springframework.stereotype.Service;
 
 

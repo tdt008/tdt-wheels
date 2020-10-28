@@ -1,13 +1,10 @@
 package com.tdt.springboot.controller;
 
-import com.tdt.springboot.service.PersonService;
+import com.tdt.springboot.service.autowired.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Priority;
 
 
 /**
@@ -31,7 +28,6 @@ import javax.annotation.Priority;
  *              得到最终匹配的bean名称
  *
  * @date: 2020年10月26日 14:57
- * @author: qinrenchuan
  */
 @RestController
 public class TestController {
