@@ -41,6 +41,15 @@ package com.tdt.springboot.juc;
  * 2）当第一个操作是volatile读时，不管第二个操作是什么，都不能重排序。这个规则确保volatile读之后的操作不会被编译器重排序到volatile读之前。
  * 3）当第一个操作是volatile写，第二个操作是volatile读时，不能重排序。
  *
+ *
+ * 对于final域，编译器和处理器要遵守两个重排序规则：
+ *
+ *      在构造函数内对一个final域的写入，与随后把这个被构造对象的引用赋值给一个引用变量，这两个操作之间不能重排序。（先写入final变量，后调用该对象引用）
+ * 原因：编译器会在final域的写之后，插入一个StoreStore屏障
+ *
+ *      初次读一个包含final域的对象的引用，与随后初次读这个final域，这两个操作之间不能重排序（先读对象的引用，后读final变量）
+ * 原因：编译器会在读final域操作的前面插入一个LoadLoad屏障
+ *
  * @date: 2020年11月03日 16:31
  * @author: qinrenchuan
  */
