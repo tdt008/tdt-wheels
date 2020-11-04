@@ -1,7 +1,9 @@
 package com.tdt.springboot.juc;
 
 /**
- * description: DemoAcDaemon
+ * description:
+ *      调用 setDaemon(boolean on)设置守护线程要在线程启动前，否则会抛出异常。
+ *      守护线程在退出的时候并不会执行 finnaly 块中的代码，所以将释放资源等操作不要放在 finnaly 块中执行，这种操作是不安全的。
  *
  * @date: 2020年11月04日 15:14
  * @author: qinrenchuan
