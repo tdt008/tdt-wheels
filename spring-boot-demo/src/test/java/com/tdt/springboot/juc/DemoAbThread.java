@@ -8,8 +8,12 @@ package com.tdt.springboot.juc;
  */
 public class DemoAbThread {
     public static void main(String[] args) throws Exception {
-        new MyThread("高级", 10).start();
-        new MyThread("低级", 1).start();
+        // 10
+        new MyThread("高级", Thread.MAX_PRIORITY).start();
+        // 5
+        new MyThread("普通级", Thread.NORM_PRIORITY).start();
+        // 1
+        new MyThread("低级", Thread.MIN_PRIORITY).start();
     }
 
     static class MyThread extends Thread {
