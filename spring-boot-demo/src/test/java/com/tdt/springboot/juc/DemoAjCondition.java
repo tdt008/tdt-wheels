@@ -4,7 +4,11 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * description: DemoAjCondition
+ * description:
+ *      注意区分 AQS 的同步队列和 Condition 的条件队列。
+ *          1.线程抢锁失败时进入 AQS 同步队列，AQS 同步队列中的线程都是等待着随时准备抢锁的。
+ *          2.线程因为没有满足某一条件而调用 condition.await()方法之后进入 Condition 条件队列，Condition 条件队列中的线程只能等着，没有获取锁的机会。
+ *          3.当条件满足后调用 condition.signal()线程被唤醒，那么线程就从 Condition 条件队列移除，进入 AQS 同步队列，被赋予抢锁继续执行的机会。
  *
  * @date: 2020年11月09日 11:44
  * @author: qinrenchuan
