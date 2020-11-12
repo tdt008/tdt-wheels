@@ -27,9 +27,9 @@ public class DemoAfJdkProxyFactory implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println("proxy before");
+        System.out.println("myproxy before");
         Object invokeObj = method.invoke(targetObj, args);
-        System.out.println("proxy after");
+        System.out.println("myproxy after");
         return invokeObj;
     }
 

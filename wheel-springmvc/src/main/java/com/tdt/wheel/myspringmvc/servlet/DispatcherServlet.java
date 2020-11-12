@@ -149,7 +149,7 @@ public class DispatcherServlet extends HttpServlet {
 
 
 	private void scanBasePackage(String basePackage) {
-		// 注意： 为了得到基包路径选哟对basePackage做转换，将.转换为/
+		// 注意： 为了得到基包下面URL路径需要对basePackage做转换，将.转换为/
 		URL url = this.getClass().getClassLoader().getResource(
 				basePackage.replaceAll("\\.", "/"));
 		File basePackageFile = new File(url.getPath());

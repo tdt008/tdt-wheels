@@ -32,9 +32,9 @@ public class DemoAgCglibProxyFactory implements MethodInterceptor {
 
     @Override
     public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
-        System.out.println("cglib proxy before");
+        System.out.println("cglib myproxy before");
         Object invoke = methodProxy.invoke(targetObj, args);
-        System.out.println("cglib proxy after");
+        System.out.println("cglib myproxy after");
         return invoke;
     }
 
