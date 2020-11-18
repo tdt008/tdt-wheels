@@ -2,6 +2,7 @@ package com.tdt.wheel.gateway.http;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.http.RequestEntity;
 
 /**
  * description: RequestContext
@@ -10,8 +11,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author: qinrenchuan
  */
 public class RequestContext {
-    private HttpServletRequest req;
-    private HttpServletResponse resp;
+    private HttpServletRequest request;
+    private HttpServletResponse response;
+    private RequestEntity<byte[]> requestEntity;
 
     private static RequestContext requestContext = new RequestContext();
 
@@ -22,13 +24,27 @@ public class RequestContext {
     private RequestContext() {
     }
 
-    public RequestContext setReq(HttpServletRequest req) {
-        this.req = req;
-        return this;
+    public HttpServletRequest getRequest() {
+        return request;
     }
 
-    public RequestContext setResp(HttpServletResponse resp) {
-        this.resp = resp;
-        return this;
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+
+    public RequestEntity<byte[]> getRequestEntity() {
+        return requestEntity;
+    }
+
+    public void setRequestEntity(RequestEntity<byte[]> requestEntity) {
+        this.requestEntity = requestEntity;
     }
 }
