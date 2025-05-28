@@ -1,0 +1,24 @@
+server:
+  port: 9099
+
+
+#  ES 配置解析
+#  启动类注解@SpringBootApplication
+#    --> @EnableAutoConfiguration
+#       --> @Import({AutoConfigurationImportSelector.class})
+#         selectImports()无疑是最核心的逻辑，它决定了加载哪些自动配置类。
+#         具体地，首先判断是否启用@EnableAutoConfiguration注解，如果已经启用，那么getAutoConfigurationEntry()将会从
+#         spring-boot-autoconfigure模块中META-INF目录下spring.factories文件中加载所有自动配置类,如下为elasticsear相关的自动配置，这里重点关注ElasticsearchRestClientAutoConfiguration
+#             org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientAutoConfiguration,
+#             org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchDataAutoConfiguration,\
+#             org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchRepositoriesAutoConfiguration,\
+#             org.springframework.boot.autoconfigure.data.elasticsearch.ReactiveElasticsearchRepositoriesAutoConfiguration,\
+#             org.springframework.boot.autoconfigure.data.elasticsearch.ReactiveElasticsearchRestClientAutoConfiguration,\
+#
+spring:
+  elasticsearch:
+    rest:
+      # 多个使用英文逗号分开
+      uris: 192.168.4.80:9200
+      read-timeout: 155
+      connection-timeout: 155

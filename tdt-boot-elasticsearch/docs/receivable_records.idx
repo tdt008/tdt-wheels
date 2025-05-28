@@ -1,0 +1,48 @@
+#
+DELETE receivable_records
+
+PUT receivable_records
+{
+    "settings": {
+        "number_of_shards": 1,
+        "number_of_replicas": 0
+    },
+    "mappings":{
+        "properties" : {
+                    "actualPayAmount" : {
+                      "type" : "double"
+                    },
+                    "amount" : {
+                      "type" : "double"
+                    },
+                    "gmtCreate" : {
+                      "type" : "long"
+                    },
+                    "id" : {
+                      "type" : "long"
+                    },
+                    "memberId" : {
+                      "type" : "long"
+                    },
+                    "orderCode" : {
+                      "type" : "text"
+                    },
+                    "payStoreId" : {
+                      "type" : "long"
+                    },
+                    "receivableType" : {
+                      "type" : "integer"
+                    },
+                    "storeValuePayAmount" : {
+                      "type" : "double"
+                    }
+                  }
+                }
+    }
+
+}
+
+
+
+# 查询索引
+GET /receivable_records/_mapping

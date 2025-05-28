@@ -1,0 +1,56 @@
+#
+DELETE mq_error_log
+
+PUT mq_error_log
+{
+    "settings": {
+        "number_of_shards": 1,
+        "number_of_replicas": 0
+    },
+    "mappings" : {
+          "properties" : {
+            "count" : {
+              "type" : "integer"
+            },
+            "createTime" : {
+              "type" : "date"
+            },
+            "id" : {
+              "type" : "long"
+            },
+            "messageBody" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "tags" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "topic" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            }
+          }
+        }
+
+}
+
+
+
+# 查询索引
+GET /mq_error_log/_mapping

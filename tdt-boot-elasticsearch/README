@@ -1,0 +1,34 @@
+# 索引查询
+GET <index>/_doc/<_id>
+HEAD <index>/_doc/<_id>
+GET <index>/_source/<_id>
+HEAD <index>/_source/<_id>
+
+# mutil get
+GET <index>/_mget
+{
+    "docs":[
+        {
+            "_id": 1
+        },
+        {
+            "_id": 2
+        }
+    ]
+}
+
+# 查询指定字段 _source_includes _source_excludes
+GET <index>/_source/<_id>?_source_includes=xxx1,xxx2
+
+GET /mq_error_log/_source/1111111?_source_includes=tags,id,messageBody
+GET /mq_error_log/_source/1111111?_source_excludes=tags,id,messageBody
+
+POST <index>/_search
+{
+    "query":{
+        "match_all": {
+        }
+    },
+    "fields":["xxx1", "xxx2"],
+    "_source":"false"
+}

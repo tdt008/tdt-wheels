@@ -1,0 +1,62 @@
+#
+DELETE order_back_records
+
+PUT order_back_records
+{
+    "settings": {
+        "number_of_shards": 1,
+        "number_of_replicas": 0
+    },
+    "mappings" : {
+          "properties" : {
+            "amount" : {
+              "type" : "double"
+            },
+            "bankCardAmount" : {
+              "type" : "double"
+            },
+            "cardAmount" : {
+              "type" : "double"
+            },
+            "gmtCreate" : {
+              "type" : "long"
+            },
+            "groupByDay" : {
+              "type" : "integer"
+            },
+            "groupByMonth" : {
+              "type" : "integer"
+            },
+            "id" : {
+              "type" : "long"
+            },
+            "memberId" : {
+              "type" : "long"
+            },
+            "orderCode" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "payStoreId" : {
+              "type" : "long"
+            },
+            "receivableType" : {
+              "type" : "integer"
+            },
+            "storeValueAmount" : {
+              "type" : "double"
+            }
+          }
+        }
+
+}
+
+
+
+# 查询索引
+GET /order_back_records/_mapping

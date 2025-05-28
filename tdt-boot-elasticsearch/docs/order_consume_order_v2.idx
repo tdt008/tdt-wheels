@@ -1,0 +1,404 @@
+#
+DELETE order_consume_order_v2
+
+PUT order_consume_order_v2
+{
+    "settings": {
+        "number_of_shards": 1,
+        "number_of_replicas": 0
+    },
+    "mappings" : {
+          "properties" : {
+            "canEvaluation" : {
+              "type" : "long"
+            },
+            "code" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "consumeOrderAssets" : {
+              "type" : "nested",
+              "properties" : {
+                "assetConsumptionType" : {
+                  "type" : "integer"
+                },
+                "assetId" : {
+                  "type" : "long"
+                },
+                "assetItemName" : {
+                  "type" : "text"
+                },
+                "cardType" : {
+                  "type" : "long"
+                },
+                "consumeAmount" : {
+                  "type" : "double"
+                },
+                "consumeOrderAssetItemList" : {
+                  "type" : "nested",
+                  "properties" : {
+                    "assetConsumptionType" : {
+                      "type" : "integer"
+                    },
+                    "consumeAmount" : {
+                      "type" : "double"
+                    },
+                    "consumeOrderAssetId" : {
+                      "type" : "long"
+                    },
+                    "consumeOrderItemConsumableList" : {
+                      "type" : "nested",
+                      "properties" : {
+                        "amount" : {
+                          "type" : "long"
+                        },
+                        "consumableSkuCode" : {
+                          "type" : "text"
+                        },
+                        "consumableSkuId" : {
+                          "type" : "long"
+                        },
+                        "consumeAmount" : {
+                          "type" : "double"
+                        },
+                        "consumeItemId" : {
+                          "type" : "long"
+                        },
+                        "consumeUnitName" : {
+                          "type" : "text"
+                        },
+                        "gmtCreate" : {
+                          "type" : "long"
+                        },
+                        "gmtModified" : {
+                          "type" : "long"
+                        },
+                        "id" : {
+                          "type" : "long"
+                        },
+                        "name" : {
+                          "type" : "text"
+                        },
+                        "totalAmount" : {
+                          "type" : "integer"
+                        }
+                      }
+                    },
+                    "gmtCreate" : {
+                      "type" : "long"
+                    },
+                    "gmtModified" : {
+                      "type" : "long"
+                    },
+                    "goodsName" : {
+                      "type" : "text"
+                    },
+                    "goodsSkuCode" : {
+                      "type" : "text"
+                    },
+                    "goodsSkuId" : {
+                      "type" : "long"
+                    },
+                    "goodsSpecs" : {
+                      "type" : "nested",
+                      "properties" : {
+                        "name" : {
+                          "type" : "text"
+                        },
+                        "value" : {
+                          "type" : "text"
+                        }
+                      }
+                    },
+                    "goodsSpuCode" : {
+                      "type" : "text"
+                    },
+                    "goodsSpuId" : {
+                      "type" : "long"
+                    },
+                    "goodsType" : {
+                      "type" : "long"
+                    },
+                    "id" : {
+                      "type" : "long"
+                    },
+                    "itemDurationMinute" : {
+                      "type" : "integer"
+                    },
+                    "mainUrl" : {
+                      "type" : "text"
+                    },
+                    "quantity" : {
+                      "type" : "integer"
+                    },
+                    "supplierId" : {
+                      "type" : "long"
+                    },
+                    "supplierName" : {
+                      "type" : "text",
+                      "fields" : {
+                        "keyword" : {
+                          "type" : "keyword",
+                          "ignore_above" : 256
+                        }
+                      }
+                    },
+                    "totalDurationMinute" : {
+                      "type" : "integer"
+                    }
+                  }
+                },
+                "consumeOrderId" : {
+                  "type" : "long"
+                },
+                "consumeOrderItemConsumableList" : {
+                  "type" : "nested",
+                  "properties" : {
+                    "amount" : {
+                      "type" : "integer"
+                    },
+                    "consumableSkuCode" : {
+                      "type" : "text"
+                    },
+                    "consumableSkuId" : {
+                      "type" : "long"
+                    },
+                    "consumeItemId" : {
+                      "type" : "long"
+                    },
+                    "consumeUnitName" : {
+                      "type" : "text"
+                    },
+                    "gmtCreate" : {
+                      "type" : "long"
+                    },
+                    "gmtModified" : {
+                      "type" : "long"
+                    },
+                    "id" : {
+                      "type" : "long"
+                    },
+                    "name" : {
+                      "type" : "text"
+                    },
+                    "totalAmount" : {
+                      "type" : "integer"
+                    }
+                  }
+                },
+                "gmtCreate" : {
+                  "type" : "long"
+                },
+                "gmtModified" : {
+                  "type" : "long"
+                },
+                "goodsName" : {
+                  "type" : "text"
+                },
+                "goodsSkuCode" : {
+                  "type" : "text"
+                },
+                "goodsSkuId" : {
+                  "type" : "long"
+                },
+                "goodsSpecs" : {
+                  "type" : "nested",
+                  "properties" : {
+                    "name" : {
+                      "type" : "text"
+                    },
+                    "value" : {
+                      "type" : "text"
+                    }
+                  }
+                },
+                "goodsSpuCode" : {
+                  "type" : "text"
+                },
+                "goodsSpuId" : {
+                  "type" : "long"
+                },
+                "goodsType" : {
+                  "type" : "integer"
+                },
+                "groupByDay" : {
+                  "type" : "long"
+                },
+                "groupByMonth" : {
+                  "type" : "long"
+                },
+                "id" : {
+                  "type" : "long"
+                },
+                "isGiftAsset" : {
+                  "type" : "boolean"
+                },
+                "itemDurationMinute" : {
+                  "type" : "integer"
+                },
+                "mainUrl" : {
+                  "type" : "text"
+                },
+                "purchaseOrderCode" : {
+                  "type" : "text"
+                },
+                "purchaseOrderId" : {
+                  "type" : "long"
+                },
+                "purchaseOrderType" : {
+                  "type" : "text"
+                },
+                "quantity" : {
+                  "type" : "integer"
+                },
+                "supplierId" : {
+                  "type" : "long"
+                },
+                "supplierName" : {
+                  "type" : "text",
+                  "fields" : {
+                    "keyword" : {
+                      "type" : "keyword",
+                      "ignore_above" : 256
+                    }
+                  }
+                },
+                "totalDurationMinute" : {
+                  "type" : "integer"
+                }
+              }
+            },
+            "createUser" : {
+              "type" : "long"
+            },
+            "createUserName" : {
+              "type" : "text"
+            },
+            "gmtClose" : {
+              "type" : "long"
+            },
+            "gmtCreate" : {
+              "type" : "long"
+            },
+            "gmtFinish" : {
+              "type" : "long"
+            },
+            "gmtInput" : {
+              "type" : "text"
+            },
+            "gmtModified" : {
+              "type" : "long"
+            },
+            "groupByDay" : {
+              "type" : "long"
+            },
+            "groupByMonth" : {
+              "type" : "long"
+            },
+            "id" : {
+              "type" : "long"
+            },
+            "isAdditional" : {
+              "type" : "boolean"
+            },
+            "isEvaluation" : {
+              "type" : "long"
+            },
+            "isEvalvatlon" : {
+              "type" : "integer"
+            },
+            "memberDeleted" : {
+              "type" : "boolean"
+            },
+            "memberId" : {
+              "type" : "long"
+            },
+            "memberIdentity" : {
+              "type" : "integer"
+            },
+            "memberImageUrl" : {
+              "type" : "text"
+            },
+            "memberLevel" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "memberName" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "memberPhone" : {
+              "type" : "long",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "remark" : {
+              "type" : "text"
+            },
+            "serviceAdvisor" : {
+              "type" : "text"
+            },
+            "signatureUrl" : {
+              "type" : "text"
+            },
+            "status" : {
+              "type" : "integer"
+            },
+            "storeId" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "storeName" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "totalAssetQuantity" : {
+              "type" : "long"
+            },
+            "totalConsumeAmount" : {
+              "type" : "double"
+            },
+            "totalQuantity" : {
+              "type" : "integer"
+            },
+            "verifyType" : {
+              "type" : "long"
+            }
+          }
+        }
+
+}
+
+
+
+# 查询索引
+GET /order_consume_order_v2/_mapping
